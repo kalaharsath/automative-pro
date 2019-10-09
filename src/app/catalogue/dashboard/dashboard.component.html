@@ -1,0 +1,421 @@
+<div class="container">
+  <div class="card-row px-2">
+    <div class="card">
+      <div class="text-right"><img src="../../../assets/img/ts.png" style="height:40px;"></div>
+      <div class="left-content">
+        <h4>{{itemCount}}</h4>
+        <h4>Items Count</h4>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="text-right"><img src="../../../assets/img/ts.png" style="height:40px;"></div>
+      <div class="left-content">
+        <h4>{{userCount}}</h4>
+        <h4>User Count</h4>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="text-right"><img src="../../../assets/img/ts.png" style="height:40px;"></div>
+      <div class="left-content">
+        <h4>{{solditemscounts}}</h4>
+        <h4>Sold Items Counts</h4>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="text-right"><img src="../../../assets/img/ts.png" style="height:40px;"></div>
+      <div class="left-content">
+        <h4>{{returnitemscount}}</h4>
+        <h4>Return Items Counts</h4>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="text-right"><img src="../../../assets/img/ts.png" style="height:40px;"></div>
+      <div class="left-content">
+        <h4>000</h4>
+        <h4>Cancelled</h4>
+      </div>
+    </div>
+  </div>
+  <div class="navigate px-2 py-3">
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Report</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Deals</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-supplier" role="tab" aria-controls="pills-contact" aria-selected="false">Supplier</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-coupons-tab" data-toggle="pill" href="#pills-coupons" role="tab" aria-controls="pills-profile" aria-selected="false">coupons</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-invoice" role="tab" aria-controls="pills-contact" aria-selected="false">invoice</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-userinfo" role="tab" aria-controls="pills-profile" aria-selected="false">user info</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-topten" role="tab" aria-controls="pills-contact" aria-selected="false">Top ten selling products</a>
+      </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent">
+      <!-- tab1 -->
+      <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+        <div class="select-container">
+            <select class="form-control" [(ngModel)]="model.countryCode" (change)="getCountryCode($event.target.value)">
+               <option select value="">-Select Country-</option>
+                <option value="us">us</option>
+                <option value="India">India</option>
+               
+            </select>
+              <select class="form-control" [(ngModel)]="model.suplier">
+                <option value="">-Select Suplier-</option>
+                <option value="Doba">Doba</option>
+               
+            </select>
+
+    
+            <select class="form-control" [(ngModel)]="model.categoryName" (change)="getCategoryName($event.target.value)">
+                <option select  value="">-Select Category-</option>
+                <option value="Apparel">Apparel</option>
+                <option value="Automotive">Automotive</option>
+                <option value="Books">Books</option>
+                <option value="electronics">electronics</option>
+                <option value="Games & Movies & Music">Games & Movies & Music</option>
+                <option value="Health">Health</option>
+                <option value="Home">Home</option>
+                <option value="Sports">Sports</option>
+                <option value="Toys">Toys</option>
+            </select>
+    
+            <select class="form-control">
+                <option value="books">-Select SubCategory-</option>
+                 <option *ngFor="let cat of subCategory" value="{{cat}}">{{cat}}</option>
+            </select>
+    
+          
+    
+            <select class="form-control">
+                <option value="">-Select Brand-</option>
+               <option *ngFor="let bran of brand" value="{{bran}}">{{bran}}</option>
+                
+            </select>
+              <!--  <label class="control-label">Start Date </label>    -->
+               <input type="text"
+            class="form-control"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            #dp="bsDatepicker"
+            bsDatepicker 
+            placeholder="From Date" [(ngModel)]="model.fromDate"
+            >
+
+             <input type="text"
+            class="form-control"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            #dp="bsDatepicker"
+            bsDatepicker 
+             placeholder="To Date" [(ngModel)]="model.toDate">
+           <!--   <input type="text" class="form-control dateAnimate1" id="dateAnimate1" placeholder="Start Date" >
+              <input type="text" class="form-control dateAnimate2" id="dateAnimate2" placeholder="End Date">  -->
+    
+         <select class="form-control">
+                <option value="">-Select Status-</option>
+                <option value="Funded">Funded</option>
+                <option value="Missed items">Missed items</option>
+                <option value="Cancelled Items">Cancelled Items</option>
+                <option value="Wish list Items">Wish list Items</option>
+                <option value="Returned Items">Returned Items</option>                
+            </select>   
+          
+        </div>
+        <form class="search-form mt-4">
+          <input type="text" class="search-input float-right" placeholder="search...">
+        </form>
+
+      <div class="clearfix"></div>
+     
+
+        <div class="table-responsive mt-5">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th>Country</th>
+                <th>Supplier</th>
+                <th>Category</th>
+                <th>Sub Category</th>
+                <th>Brands</th>
+                <th>Date on sold</th>
+                <th>price</th>
+                <th>Status</th>
+                <th>Count</th>
+                <th>View more</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>India</td>
+                <td>someone</td>
+                <td>Clothing</td>
+                <td>Tops</td>
+                <td>Lee cooper</td>
+                <td>Lee cooper</td>
+                <td>04/10/2019</td>
+                <td>1200</td>
+                <td>in stock</td>
+                <td>8000</td>
+              </tr>
+
+              <tr>
+                <td>India</td>
+                <td>someone</td>
+                <td>Clothing</td>
+                <td>Tops</td>
+                <td>Lee cooper</td>
+                <td>Lee cooper</td>
+                <td>04/10/2019</td>
+                <td>1200</td>
+                <td>in stock</td>
+                <td>8000</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <!-- /# tab1 -->
+      
+      <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+       <div class="select-container">
+            <select class="form-control" [(ngModel)]="model.countryCode" (change)="getCountryCode($event.target.value)">
+               <option select value="">-Select Country-</option>
+                <option value="us">us</option>
+                <option value="India">India</option>
+               
+            </select>
+              <select class="form-control" [(ngModel)]="model.suplier">
+                <option value="">-Select Suplier-</option>
+                <option value="Doba">Doba</option>
+               
+            </select>
+
+    
+            <select class="form-control" [(ngModel)]="model.categoryName" (change)="getCategoryName($event.target.value)">
+                <option select  value="">-Select Category-</option>
+                <option value="Apparel">Apparel</option>
+                <option value="Automotive">Automotive</option>
+                <option value="Books">Books</option>
+                <option value="electronics">electronics</option>
+                <option value="Games & Movies & Music">Games & Movies & Music</option>
+                <option value="Health">Health</option>
+                <option value="Home">Home</option>
+                <option value="Sports">Sports</option>
+                <option value="Toys">Toys</option>
+            </select>
+    
+            <select class="form-control">
+                <option value="books">-Select SubCategory-</option>
+                 <option *ngFor="let cat of subCategory" value="{{cat}}">{{cat}}</option>
+            </select>
+    
+          
+    
+            <select class="form-control">
+                <option value="">-Select Brand-</option>
+               <option *ngFor="let bran of brand" value="{{bran}}">{{bran}}</option>
+                
+            </select>
+              <!--  <label class="control-label">Start Date </label>    -->
+               <input type="text"
+            class="form-control"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            #dp="bsDatepicker"
+            bsDatepicker 
+            placeholder="From Date" [(ngModel)]="model.fromDate"
+            >
+
+             <input type="text"
+            class="form-control"
+            [minDate]="minDate"
+            [maxDate]="maxDate"
+            #dp="bsDatepicker"
+            bsDatepicker 
+             placeholder="To Date" [(ngModel)]="model.toDate">
+           <!--   <input type="text" class="form-control dateAnimate1" id="dateAnimate1" placeholder="Start Date" >
+              <input type="text" class="form-control dateAnimate2" id="dateAnimate2" placeholder="End Date">  -->
+    
+         <select class="form-control">
+                <option value="">-Select Status-</option>
+                <option value="Funded">Funded</option>
+                <option value="Missed items">Missed items</option>
+                <option value="Cancelled Items">Cancelled Items</option>
+                <option value="Wish list Items">Wish list Items</option>
+                <option value="Returned Items">Returned Items</option>                
+            </select>   
+          
+        </div>
+          <div class="table-responsive mt-5">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                 <th>Master Suplier</th>
+                <th>Brand name</th>
+                <th>Category</th>
+                <th>Custom price</th>
+                <th>Sub Category</th>
+                <th>Suplier Name</th>
+                <th>Date on sold</th>
+                <th>price</th>
+                <th>Status</th>
+                <th>Dealer Type</th>
+                <th>submit</th>
+              <!--   <th>View more</th> -->
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let prod of productDetails">
+                <td>{{prod.master_suplier}}</td>
+                <td>{{prod.brand_name}}</td>
+                <td>{{prod.category}}</td>
+                <td>{{prod.custom_price}}</td>
+                <td>{{prod.subcategory}}</td>
+                <td>{{prod.suplier_name}}</td>
+                <td>{{prod.date}}</td>
+                <td>{{prod.price}}</td>
+                <td>{{prod.status}}</td>
+                <td> 
+      <div>
+         <select class="form-control" (change)="getType($event.target.value)"  [(ngModel)]="prod.dealtype" >
+                <option selected value="">-Select Status-</option>
+                <option value="F">Flash Deals</option>
+                <option value="H">Hot Deals</option>
+                <option value="T">Today Deals</option>                            
+            </select>   
+     <!--  <label class="form-check-inline"> 
+      <input class="form-check-input" id="exampleRadios1" type="radio" name="mode" value="F" [(ngModel)]="dealtype" [checked]="radio1" (change)="getType($event.target.value)" > Flash Deals 
+      </label>
+       <label class="form-check-inline"> 
+      <input class="form-check-input" id="exampleRadios2" type="radio" name="mode" value="H" [(ngModel)]="dealtype" [checked]="radio2"  > Hot Deals 
+      </label>
+      <label class="form-check-inline"> 
+      <input class="form-check-input" id="exampleRadios3" type="radio" name="mode" value="T"  [(ngModel)]="dealtype" [checked]="radio3" > Today Deals 
+      </label>  -->
+
+
+      </div>    
+               </td>
+              <td>
+                <button type="submit" (click)="submitProductDetails(prod)">Submit</button> </td>
+                <!--   <td>{{}}</td> -->
+              </tr>
+
+             
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <div class="tab-pane fade" id="pills-supplier" role="tabpanel" aria-labelledby="pills-contact-tab">
+        Suplier...
+      </div>
+
+       <div class="tab-pane fade" id="pills-coupons" role="tabpanel" aria-labelledby="pills-contact-tab">
+        Coupons...
+      </div>
+
+       <div class="tab-pane fade" id="pills-invoice" role="tabpanel" aria-labelledby="pills-contact-tab">
+        invoice...
+      </div>
+
+       <div class="tab-pane fade" id="pills-userinfo" role="tabpanel" aria-labelledby="pills-contact-tab">
+        user Info...
+      </div>
+
+       <div class="tab-pane fade" id="pills-topten" role="tabpanel" aria-labelledby="pills-contact-tab">
+        Top Ten Selling  product...
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+<section class="main_continaer">
+    <!-- <div  class="row">
+        <div  class="col-md-2">
+     
+           
+                <h3>10000</h3>
+                <h4>Product</h4>
+            
+      
+        </div>
+        
+        <div  class="col-md-2">
+        
+                  <h3>5000</h3>
+                  <h4 >   Users</h4>
+         
+        </div>
+        <div  class="col-md-2">
+           
+                    <h3>30000</h3>
+                    <h4 >  items sold </h4>
+                 
+          </div> -->
+        <!--   <div  class="col-md-2">
+              <div  class="snapshot_container">
+                    <div  class="snap_img">
+                      <img  alt="" src="./assets/img/ios.png">
+                    </div>
+                    <div  class="snap_values">
+                      <h3>{{iosusr}}</h3>
+                      <h4 >IOS Users</h4>
+                    </div>
+              </div>
+            </div>
+             <div  class="col-md-2">
+                <div  class="snapshot_container">
+                      <div  class="snap_img">
+                        
+                        <img  alt="" src="./assets/img/on.png">
+                      </div> 
+  
+                      <div  class="snap_values">
+                        <h3>{{onlineUsers}}</h3>
+                        <h4 >Online Users</h4>
+                      </div>
+                </div>
+              </div>
+          <div  class="col-md-2">
+              <div  class="snapshot_container">
+                    <div  class="snap_img">
+                      <img  alt="" src="./assets/img/of.png">
+                    </div>
+                    <div  class="snap_values">
+                      <h3>{{offlineUsers}}</h3>
+                      <h4 >Offline Users</h4>
+                    </div>
+              </div>
+            </div>            -->
+    <!-- </div> -->
+
+
+  
+  
+</section>
+
+
+
+

@@ -1,0 +1,42 @@
+h1,h2,h3,h4,h5,h6{
+    margin: 0px;
+}
+.container{
+    max-width: 1300px;
+}
+.card-row{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.card{
+    min-height: 100px;
+    width: 18%;
+    padding: 1rem;
+    position: relative;
+    border: 1px solid #e1e1e1;
+    min-height: 130px;
+}
+.left-content{
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+}
+.left-content h4{
+    margin-top: 7px;
+}
+#pills-tab{
+    justify-content: space-between;
+}
+.select-container{
+    display: flex;
+    justify-content: space-between;
+}
+select{
+    margin-right: 15px;
+}
+.search-input{
+    width: 300px;
+    border-radius: 15px;
+    padding: 5px;
+}

@@ -1,0 +1,11 @@
+.main_continaer{width:100%;float:left;padding:20px;}
+
+.login-container{max-width: 500px;margin: 5% auto;}
+.snapshot_container{width:100%;float: left;background:#fff;border:1px solid #e8e8e8;padding:10px;-webkit-box-shadow: 2px 6px 5px 0px rgba(236,236,236,1);
+    -moz-box-shadow: 2px 6px 5px 0px rgba(236,236,236,1);
+    box-shadow: 2px 6px 5px 0px rgba(236,236,236,1);margin-bottom:15px;}
+.snapshot_container .snap_img{width:100%;float:left;text-align: right;}
+.snapshot_container .snap_img img{width:18%;}
+.snapshot_container .snap_values{width:100%;float:left;}
+.snapshot_container .snap_values h3{font-size:20px;color:#000;font-weight:400;margin:0px;min-height: 30px;}
+.snapshot_container .snap_values h4{font-size:15px;color:#000;font-weight:300;margin:0px;}
