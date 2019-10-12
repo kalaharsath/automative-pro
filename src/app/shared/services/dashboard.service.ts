@@ -23,11 +23,11 @@ constructor(private http: HttpClient) {
 public handleError = (error: Response) => {
     return Observable.throw(error)
 }   
-// getReturnitemscounts() { 
-//     console.log('server side');
-//     return this.http.get(this.url + 'v1/dashboard/returnitemscounts').pipe(
-//             map(responce=>responce),           
-//         )}
+getReturnitemscounts() { 
+    console.log('server side');
+    return this.http.get(this.url + 'v1/dashboard/returnitemscount').pipe(
+            map(responce=>responce),           
+        )}
 
 httpOptions = {
     headers: new HttpHeaders({
@@ -40,18 +40,18 @@ httpOptions = {
   getItemscounts() {
     return this
             .http
-            .get(this.url + 'v1/dashboard/itemcounts');
+            .get(this.url + 'v1/dashboard/itemscount');
   }
 
    getUsercounts() {
     return this
             .http
-            .get(this.url + 'v1/dashboard/usercounts');
+            .get(this.url + 'v1/dashboard/userscount');
   }
      getSolditemscounts() {
     return this
             .http
-            .get(this.url + 'v1/dashboard/solditemscounts');
+            .get(this.url + 'v1/dashboard/solditemscount');
   }
 
   
@@ -65,8 +65,10 @@ httpOptions = {
 
 
       getSubCategory(data) {
-     var obj={"countryCode":data.countryCode,"categoryName":data.categoryName}
-    return this.http.post(this.url+'v1/dashboard/subcategories', JSON.stringify(obj), this.httpOptions)
+     var obj={"countryCode":data.countryCode,"categoryName":data.categoryName};
+  //   let body = JSON.stringify(obj);   
+  //  console.log(body);
+    return this.http.post(this.url+'v1/dashboard/subcategory', obj, this.httpOptions)
     .pipe(
       retry(1),
       catchError(this.errorHandl)
@@ -145,16 +147,16 @@ httpOptions = {
 
       dealsAdd(data) {
      var obj={
-     "countryCode":data.countryCode,
+     "countryCode":"us",
      "categoryName":data.category,
      "subCategoryName" : data.subcategory,
      "item_id" : data.item_id,
      "brand" : data.brand_name,
      "dealtype" : data.dealtype,
-     "discount"  : "10",
-     "item_price" : data.price,
-     "discount_price" : "",
-     "dealhours" : 4
+     "discount"  : data.discount,
+     "item_price" : data.item_price,
+     "discount_price" : data.discount_price,
+     "dealhours" : data.dealhours
    };
     return this.http.post(this.url+'v1/dashboard/deals/add', JSON.stringify(obj), this.httpOptions)
     .pipe(

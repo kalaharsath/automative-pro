@@ -11,6 +11,7 @@ import { HomeComponent } from './home/home.component';
 import { DashboardService } from './shared/services/dashboard.service';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
      BsDatepickerModule.forRoot(),
     DatepickerModule.forRoot(),
-    BrowserAnimationsModule 
+    BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [DashboardService],
   bootstrap: [AppComponent]

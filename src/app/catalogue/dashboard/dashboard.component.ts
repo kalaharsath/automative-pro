@@ -26,24 +26,27 @@ public dealtype : Array<any>;
 public selecteddealtype : any;
  
  minDate : any;
- public demo1_radio : boolean;
+
  public radio1 : boolean;
  public radio2 : boolean;
  public radio3 : boolean;
  public dealtypeVal : any;
+ public perpage = 2;
+ public p = 1;
+ public total_items : number;
  
  constructor( private dashboardservice : DashboardService) {
   this.model['suplier'] = 'Doba';
   this.model['countryCode']='us';
-  this.model['categoryName']='electronics';  
-  this.model['radio1'] = true;
-  this.demo1_radio = true;
+  this.model['categoryName']='electronics';   
+ 
   this.dealtype = [{name:'Flash Deals',type:'F'},{name:'Hot Deals',type:'H'},{name:'Today Deals',type:'T'}]
   
   this.getItemscounts();
   this.getUsercounts();
   this.getSolditemscounts(); 
-  this.getProductDetails();
+  this.getReturnitemscounts();
+  this.getProductDetails(1);
  }
 
 
@@ -108,11 +111,24 @@ getSolditemscounts(){
               }, 3000);
     }) 
 }
+getReturnitemscounts(){
+   this.dashboardservice.getReturnitemscounts().subscribe(data =>{   
+      if(data){
+          this.returnitemscount = data['count'];  
+       }
+    },err =>{
+       setTimeout(() => {              
+              }, 3000);
+    }) 
+}
+
 getSubCategory(){
 	  this.dashboardservice.getSubCategory(this.model).subscribe(data =>{   
 	  	console.log('subcategory::',data);
-      if(data){
-         
+      if(data['status']=='Accepted'){
+         this.subCategory = data['responseObjects']; 
+       }else {
+          this.subCategory = [];
        }
     },err =>{
        setTimeout(() => {
@@ -123,8 +139,8 @@ getSubCategory(){
 getBrand(){
     this.dashboardservice.getBrand(this.model).subscribe(data =>{   
       console.log('brand::',data);
-      if(data){
-         
+      if(data['status']=='Accepted'){
+         this.brand = data['responseObjects']; 
        }
     },err =>{
        setTimeout(() => {
@@ -134,11 +150,15 @@ getBrand(){
 }
 
 
-getProductDetails(){
-   this.dashboardservice.getProductDetails(this.model).subscribe(data =>{   
-      console.log('getProductDetails::',data);
+getProductDetails(p){
+  console.log('pageno:',p);
+   console.log('model data:',JSON.stringify(this.model));
+  
+
+   this.dashboardservice.getProductDetails(this.model).subscribe(data =>{
       if(data['status']=='Accepted'){
            this.productDetails = data['responseObjects'];
+           this.total_items = this.productDetails.length;
        }
     },err =>{
        setTimeout(() => {
@@ -164,7 +184,7 @@ getWishlistitems(){
 
 }
 submitProductDetails(prod){
-
+   console.log('client prod::',prod);
   this.dashboardservice.dealsAdd(prod).subscribe(data =>{   
       console.log('dealsAdd::',data);
       if(data){

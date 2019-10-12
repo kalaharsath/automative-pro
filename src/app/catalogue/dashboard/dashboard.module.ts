@@ -4,6 +4,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard.routing';
 import { DashboardComponent } from './dashboard.component';
 import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { DatepickerModule, BsDatepickerModule } from 'ngx-bootstrap/datepicker';
         ReactiveFormsModule,
         DashboardRoutingModule,
          BsDatepickerModule.forRoot(),
-    DatepickerModule.forRoot() 
+    DatepickerModule.forRoot(),
+    NgxPaginationModule 
       
     
     ],
